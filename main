@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Master — Học Tiếng Anh Cùng Flashcard</title>
+
+<!-- ============================================================
+     GOOGLE FONTS — Chỉ load 2 font, không thư viện ngoài
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. CSS VARIABLES — Hệ thống màu & token thiết kế
+   ============================================================ */
+:root {
+  /* Light mode palette */
+  --bg-page:       #EFF6FF;
+  --bg-card:       rgba(255,255,255,0.72);
+  --bg-card-back:  rgba(219,234,254,0.85);
+  --bg-glass:      rgba(255,255,255,0.55);
+  --bg-nav:        rgba(255,255,255,0.8);
+  --border:        rgba(147,197,253,0.45);
+  --border-strong: rgba(59,130,246,0.3);
+  --text-primary:  #0f172a;
+  --text-secondary:#475569;
+  --text-muted:    #94a3b8;
+  --accent:        #2563eb;
+  --accent-light:  #dbeafe;
+  --accent-hover:  #1d4ed8;
+  --success:       #16a34a;
+  --warning:       #d97706;
+  --shadow-sm:     0 1px 3px rgba(37,99,235,0.08), 0 1px 2px rgba(37,99,235,0.04);
+  --shadow-md:     0 4px 24px rgba(37,99,235,0.12), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-card:   0 8px 40px rgba(37,99,235,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-float:  0 20px 60px rgba(37,99,235,0.2), 0 4px 16px rgba(0,0,0,0.08);
+  --blur:          blur(20px) saturate(1.6);
+  --radius-sm:     8px;
+  --radius-md:     14px;
+  --radius-lg:     22px;
+  --radius-xl:     32px;
+  --font-display:  'Lora', Georgia, serif;
+  --font-body:     'Sora', sans-serif;
+  --transition:    all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] {
+  --bg-page:       #0b1120;
+  --bg-card:       rgba(15,23,42,0.85);
+  --bg-card-back:  rgba(30,58,138,0.75);
+  --bg-glass:      rgba(15,23,42,0.6);
+  --bg-nav:        rgba(10,15,30,0.88);
+  --border:        rgba(59,130,246,0.2);
+  --border-strong: rgba(96,165,250,0.35);
+  --text-primary:  #f1f5f9;
+  --text-secondary:#94a3b8;
+  --text-muted:    #64748b;
+  --accent:        #60a5fa;
+  --accent-light:  rgba(37,99,235,0.18);
+  --accent-hover:  #93c5fd;
+  --shadow-card:   0 8px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-float:  0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* Background ambient gradient orbs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.4s;
+}
+body::before {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(147,197,253,0.35) 0%, transparent 70%);
+  top: -200px; right: -100px;
+}
+body::after {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+  bottom: -150px; left: -100px;
+}
+
+[data-theme="dark"] body::before { background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%); }
+[data-theme="dark"] body::after  { background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%); }
+
+/* ============================================================
+   3. NAVIGATION / HEADER
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-nav);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  transition: var(--transition);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--accent), #818cf8);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.nav-links a:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  transition: var(--transition);
+  color: var(--text-primary);
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: rotate(15deg) scale(1.05);
+}
+
+/* Mobile hamburger — ẩn trên desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================================================
+   4. HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 5% 60px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5.5vw, 58px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+  position: relative;
+}
+
+.hero p {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+}
+.hero-cta:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,99,235,0.45);
+}
+.hero-cta svg { transition: transform 0.25s; }
+.hero-cta:hover svg { transform: translateX(3px); }
+
+/* ============================================================
+   5. STATS BAR
+   ============================================================ */
+.stats-bar {
+  position: relative; z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 5% 50px;
+  animation: fadeInUp 0.8s 0.15s ease both;
+}
+
+.stat-pill {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+.stat-pill strong { color: var(--text-primary); }
+
+/* ============================================================
+   6. MAIN CONTAINER
+   ============================================================ */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.section-sub {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 36px;
+}
+
+/* ============================================================
+   7. PROGRESS BAR
+   ============================================================ */
+.progress-wrapper {
+  margin-bottom: 32px;
+  animation: fadeInUp 0.7s 0.2s ease both;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.progress-info #progress-label { color: var(--accent); font-weight: 600; }
+
+.progress-track {
+  height: 6px;
+  background: var(--accent-light);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #818cf8);
+  border-radius: 100px;
+  width: 10%;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   8. FLASHCARD — Trọng tâm chính
+   ============================================================ */
+.card-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.7s 0.1s ease both;
+}
+
+/* Perspective container — cần để flip 3D hoạt động */
+.card-scene {
+  width: 100%;
+  max-width: 520px;
+  height: 340px;
+  perspective: 1200px;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+/* Card wrapper — cái này xoay */
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+  /* Thêm will-change để GPU accelerate */
+  will-change: transform;
+}
+
+/* Khi có class .is-flipped thì xoay 180deg theo trục Y */
+.flashcard.is-flipped { transform: rotateY(180deg); }
+
+/* Mặt trước & mặt sau — cùng kiểu base */
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* Mặt trước: glassmorphism trắng/xanh nhạt */
+.card-front {
+  background: var(--bg-card);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+/* Mặt sau: xanh dương đậm hơn */
+.card-back {
+  background: var(--bg-card-back);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  transform: rotateY(180deg); /* Mặt sau mặc định bị ẩn */
+}
+
+/* Shine effect trên card */
+.card-face::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+}
+
+/* Tag góc card */
+.card-tag {
+  position: absolute;
+  top: 18px; right: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+/* === MẶT TRƯỚC === */
+.word-display {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.phonetic {
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* Nút loa phát âm */
+.speak-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(37,99,235,0.3);
+}
+.speak-btn:hover { background: var(--accent-hover); transform: scale(1.04); }
+.speak-btn:active { transform: scale(0.97); }
+
+/* Hint text dưới card */
+.flip-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* === MẶT SAU === */
+.word-type-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid var(--border-strong);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.meaning-vn {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.example-sentence {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.6;
+  padding: 10px 16px;
+  border-left: 2px solid var(--accent);
+  background: rgba(37,99,235,0.05);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+/* Hình ảnh minh họa (placeholder svg) */
+.card-img {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--accent-light);
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+}
+
+/* ============================================================
+   9. CONTROL BUTTONS
+   ============================================================ */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.28);
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 18px rgba(37,99,235,0.38); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.btn-outline:active { transform: scale(0.98); }
+
+.btn-icon { font-size: 16px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+/* ============================================================
+   10. WORD LIST TABLE
+   ============================================================ */
+.wordlist-section {
+  margin-top: 64px;
+  animation: fadeInUp 0.7s 0.3s ease both;
+}
+
+.wordlist-search {
+  width: 100%;
+  padding: 11px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+.wordlist-search::placeholder { color: var(--text-muted); }
+.wordlist-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+
+.wordlist-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+}
+
+thead th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  background: rgba(37,99,235,0.04);
+}
+
+tbody tr {
+  transition: var(--transition);
+  cursor: pointer;
+}
+tbody tr:hover { background: var(--accent-light); }
+tbody tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+
+tbody td { padding: 14px 18px; color: var(--text-secondary); }
+tbody td:first-child { font-weight: 600; color: var(--text-primary); font-size: 15px; }
+tbody td:nth-child(2) { color: var(--accent); font-size: 13px; font-style: italic; }
+
+.type-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background: var(--accent-light);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+footer {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+footer strong { color: var(--accent); }
+
+/* ============================================================
+   12. ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+/* Khi card lật thành công — flash nhẹ */
+@keyframes cardFlash {
+  0% { opacity: 1; }
+  40% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+.flashcard.animate-flip { animation: cardFlash 0.75s ease; }
+
+/* ============================================================
+   13. RESPONSIVE — Mobile
+   ============================================================ */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-links.is-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: var(--bg-nav);
+    backdrop-filter: var(--blur);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 4px;
+    z-index: 99;
+  }
+  .hamburger { display: flex; }
+
+  .card-scene { height: 300px; }
+  .hero { padding: 48px 5% 36px; }
+  .btn { padding: 10px 16px; font-size: 13px; }
+  .controls { gap: 8px; }
+
+  thead th:nth-child(4),
+  tbody td:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION BAR
+     ============================================================ -->
+<nav class="navbar">
+  <a href="#" class="logo">
+    <div class="logo-icon">🎓</div>
+    English<span>Master</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#flashcard-section">Flashcard</a></li>
+    <li><a href="#wordlist-section">Từ vựng</a></li>
+    <li><a href="#" onclick="shuffleCards()">Xáo trộn</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:10px;">
+    <!-- Nút dark mode -->
+    <button class="theme-toggle" id="themeToggle" title="Chuyển đổi giao diện">🌙</button>
+    <!-- Hamburger mobile -->
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-badge">✦ Học thông minh hơn mỗi ngày</div>
+  <h1>Thành thạo tiếng Anh<br>qua <em>Flashcard</em> tương tác</h1>
+  <p>Học từ vựng hiệu quả với phương pháp lặp lại ngắt quãng — chỉ 10 phút mỗi ngày để thay đổi tương lai.</p>
+  <a href="#flashcard-section" class="hero-cta">
+    Bắt đầu học ngay
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+
+<!-- Stats pills -->
+<div class="stats-bar">
+  <div class="stat-pill">📚 <strong>10</strong> từ vựng phổ biến</div>
+  <div class="stat-pill">🔄 Hiệu ứng lật 3D</div>
+  <div class="stat-pill">🔊 Phát âm thực tế</div>
+  <div class="stat-pill">🌙 Dark mode</div>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main>
+
+  <!-- SECTION: FLASHCARD -->
+  <section id="flashcard-section">
+    <h2 class="section-title">Bộ Flashcard Học Từ</h2>
+    <p class="section-sub">Nhấp vào thẻ để lật — xem nghĩa tiếng Việt và ví dụ sử dụng</p>
+
+    <!-- Thanh tiến trình -->
+    <div class="progress-wrapper">
+      <div class="progress-info">
+        <span>Tiến độ học</span>
+        <span id="progress-label">1 / 10</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- KHU VỰC FLASHCARD -->
+    <div class="card-area">
+      <!-- Scene: tạo perspective 3D -->
+      <div class="card-scene" id="cardScene" onclick="flipCard()">
+        <div class="flashcard" id="flashcard">
+
+          <!-- MẶT TRƯỚC -->
+          <div class="card-face card-front">
+            <div class="card-tag">Từ vựng</div>
+            <div class="word-display" id="frontWord">Abundant</div>
+            <div class="phonetic" id="frontPhonetic">/əˈbʌndənt/</div>
+            <button class="speak-btn" id="speakBtn" onclick="speakWord(event)">
+              🔊 Phát âm
+            </button>
+          </div>
+
+          <!-- MẶT SAU -->
+          <div class="card-face card-back">
+            <div class="card-tag">Nghĩa</div>
+            <div class="word-type-badge" id="backType">Tính từ</div>
+            <div class="meaning-vn" id="backMeaning">Phong phú</div>
+            <div class="example-sentence" id="backExample">
+              "Nature is <em>abundant</em> in this region."
+            </div>
+            <div class="card-img" id="backEmoji">🌿</div>
+          </div>
+
+        </div><!-- .flashcard -->
+      </div><!-- .card-scene -->
+
+      <p class="flip-hint">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M7 5v2l1 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Nhấp vào thẻ để lật xem nghĩa
+      </p>
+    </div><!-- .card-area -->
+
+    <!-- NÚT ĐIỀU HƯỚNG -->
+    <div class="controls">
+      <button class="btn btn-outline" id="prevBtn" onclick="prevCard()">
+        <span class="btn-icon">←</span> Trước đó
+      </button>
+
+      <button class="btn btn-primary" onclick="shuffleCards()">
+        🔀 Xáo trộn
+      </button>
+
+      <button class="btn btn-outline" id="nextBtn" onclick="nextCard()">
+        Tiếp theo <span class="btn-icon">→</span>
+      </button>
+    </div>
+
+  </section><!-- #flashcard-section -->
+
+  <!-- ============================================================
+       SECTION: DANH SÁCH TỪ VỰNG
+       ============================================================ -->
+  <section class="wordlist-section" id="wordlist-section">
+    <h2 class="section-title">Danh Sách Từ Vựng</h2>
+    <p class="section-sub">Tra cứu nhanh — nhấp vào hàng để chuyển sang thẻ đó</p>
+
+    <!-- Ô tìm kiếm -->
+    <input
+      type="text"
+      class="wordlist-search"
+      id="searchInput"
+      placeholder="🔍  Tìm từ vựng..."
+      oninput="filterTable()"
+    />
+
+    <div class="wordlist-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Từ tiếng Anh</th>
+            <th>Phiên âm</th>
+            <th>Loại từ</th>
+            <th>Nghĩa tiếng Việt</th>
+            <th>Ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="wordTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <p>Được tạo bởi <strong>English Master</strong> · Học mỗi ngày, tiến bộ mỗi ngày 🚀</p>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT — Toàn bộ logic ứng dụng
+     ============================================================ -->
+<script>
+/* ============================================================
+   DỮ LIỆU TỪ VỰNG — Mảng 10 từ thông dụng nhất
+   Thêm/sửa từ ở đây để cập nhật toàn bộ ứng dụng
+   ============================================================ */
+const vocabulary = [
+  {
+    word: "Abundant",
+    phonetic: "/əˈbʌndənt/",
+    type: "Tính từ",
+    meaning: "Phong phú, dồi dào",
+    example: "Nature is <em>abundant</em> in this tropical region.",
+    emoji: "🌿"
+  },
+  {
+    word: "Brilliant",
+    phonetic: "/ˈbrɪliənt/",
+    type: "Tính từ",
+    meaning: "Xuất sắc, rực rỡ",
+    example: "She gave a <em>brilliant</em> presentation to the board.",
+    emoji: "✨"
+  },
+  {
+    word: "Curious",
+    phonetic: "/ˈkjʊəriəs/",
+    type: "Tính từ",
+    meaning: "Tò mò, hiếu kỳ",
+    example: "Children are naturally <em>curious</em> about the world.",
+    emoji: "🔍"
+  },
+  {
+    word: "Dedicate",
+    phonetic: "/ˈdedɪkeɪt/",
+    type: "Động từ",
+    meaning: "Cống hiến, dành cho",
+    example: "She <em>dedicates</em> her life to helping others.",
+    emoji: "❤️"
+  },
+  {
+    word: "Efficient",
+    phonetic: "/ɪˈfɪʃənt/",
+    type: "Tính từ",
+    meaning: "Hiệu quả, năng suất",
+    example: "The new system is more <em>efficient</em> than before.",
+    emoji: "⚡"
+  },
+  {
+    word: "Flexible",
+    phonetic: "/ˈfleksɪbəl/",
+    type: "Tính từ",
+    meaning: "Linh hoạt, dẻo dai",
+    example: "We need a more <em>flexible</em> work schedule.",
+    emoji: "🤸"
+  },
+  {
+    word: "Generate",
+    phonetic: "/ˈdʒenəreɪt/",
+    type: "Động từ",
+    meaning: "Tạo ra, sản sinh",
+    example: "Solar panels <em>generate</em> clean electricity.",
+    emoji: "⚙️"
+  },
+  {
+    word: "Harmony",
+    phonetic: "/ˈhɑːrməni/",
+    type: "Danh từ",
+    meaning: "Sự hài hòa, sự đồng thuận",
+    example: "They lived in perfect <em>harmony</em> with nature.",
+    emoji: "🎵"
+  },
+  {
+    word: "Inspire",
+    phonetic: "/ɪnˈspaɪər/",
+    type: "Động từ",
+    meaning: "Truyền cảm hứng",
+    example: "Great leaders <em>inspire</em> others to be their best.",
+    emoji: "💡"
+  },
+  {
+    word: "Journey",
+    phonetic: "/ˈdʒɜːrni/",
+    type: "Danh từ",
+    meaning: "Hành trình, chuyến đi",
+    example: "Learning is a lifelong <em>journey</em> of discovery.",
+    emoji: "🗺️"
+  }
+];
+
+/* ============================================================
+   TRẠNG THÁI ỨNG DỤNG
+   ============================================================ */
+let currentIndex = 0;       // Thẻ đang hiển thị
+let isFlipped = false;       // Thẻ đang lật hay không
+let cardOrder = [...Array(vocabulary.length).keys()]; // Thứ tự thẻ [0,1,2,...]
+let seenCards = new Set();   // Tập hợp thẻ đã xem
+
+/* ============================================================
+   KHỞI TẠO ỨNG DỤNG
+   ============================================================ */
+function init() {
+  renderCard();
+  renderTable();
+  updateProgress();
+  updateNavButtons();
+}
+
+/* ============================================================
+   RENDER FLASHCARD — Cập nhật nội dung thẻ hiện tại
+   ============================================================ */
+function renderCard() {
+  const idx = cardOrder[currentIndex];
+  const data = vocabulary[idx];
+
+  // Mặt trước
+  document.getElementById('frontWord').textContent = data.word;
+  document.getElementById('frontPhonetic').textContent = data.phonetic;
+
+  // Mặt sau
+  document.getElementById('backType').textContent = data.type;
+  document.getElementById('backMeaning').textContent = data.meaning;
+  document.getElementById('backExample').innerHTML = '"' + data.example + '"';
+  document.getElementById('backEmoji').textContent = data.emoji;
+
+  // Nếu thẻ đang lật, reset về mặt trước
+  if (isFlipped) {
+    const card = document.getElementById('flashcard');
+    card.classList.remove('is-flipped');
+    isFlipped = false;
+  }
+
+  // Đánh dấu thẻ đã xem
+  seenCards.add(currentIndex);
+}
+
+/* ============================================================
+   LẬT THẺ — Toggle flip animation
+   ============================================================ */
+function flipCard() {
+  const card = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+
+  // Thêm class is-flipped để CSS xoay 180deg
+  card.classList.toggle('is-flipped', isFlipped);
+  card.classList.add('animate-flip');
+  setTimeout(() => card.classList.remove('animate-flip'), 750);
+}
+
+/* ============================================================
+   PHÁT ÂM — Dùng Web Speech API (built-in trình duyệt)
+   ============================================================ */
+function speakWord(event) {
+  // Ngăn click lan ra card-scene (tránh flip khi nhấn loa)
+  event.stopPropagation();
+
+  const idx = cardOrder[currentIndex];
+  const word = vocabulary[idx].word;
+
+  // Web Speech API — không cần thư viện ngoài
+  if ('speechSynthesis' in window) {
+    const utter = new SpeechSynthesisUtterance(word);
+    utter.lang = 'en-US';
+    utter.rate = 0.85;  // Tốc độ đọc chậm hơn một chút
+    utter.pitch = 1;
+    speechSynthesis.cancel(); // Hủy hàng chờ cũ
+    speechSynthesis.speak(utter);
+
+    // Visual feedback: nút rung nhẹ
+    const btn = document.getElementById('speakBtn');
+    btn.style.transform = 'scale(0.93)';
+    setTimeout(() => btn.style.transform = '', 150);
+  } else {
+    alert('Trình duyệt của bạn không hỗ trợ phát âm thanh.');
+  }
+}
+
+/* ============================================================
+   ĐIỀU HƯỚNG — Trước / Tiếp theo
+   ============================================================ */
+function nextCard() {
+  if (currentIndex < vocabulary.length - 1) {
+    currentIndex++;
+    seenCards.add(currentIndex);
+    renderCard();
+    updateProgress();
+    updateNavButtons();
+  }
+}
+
+function prevCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderCard();
+    updateProgress();
+    updateNavButtons();
+  }
+}
+
+/* Cập nhật trạng thái disabled của nút Prev/Next */
+function updateNavButtons() {
+  document.getElementById('prevBtn').disabled = (currentIndex === 0);
+  document.getElementById('nextBtn').disabled = (currentIndex === vocabulary.length - 1);
+}
+
+/* ============================================================
+   XÁO TRỘN — Fisher-Yates shuffle algorithm
+   ============================================================ */
+function shuffleCards() {
+  // Shuffle mảng thứ tự
+  for (let i = cardOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cardOrder[i], cardOrder[j]] = [cardOrder[j], cardOrder[i]];
+  }
+  // Reset về thẻ đầu tiên sau khi xáo trộn
+  currentIndex = 0;
+  seenCards = new Set([0]);
+  renderCard();
+  updateProgress();
+  updateNavButtons();
+}
+
+/* ============================================================
+   THANH TIẾN TRÌNH
+   ============================================================ */
+function updateProgress() {
+  const total = vocabulary.length;
+  const seen = seenCards.size;
+  const pct = Math.round((seen / total) * 100);
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent =
+    (currentIndex + 1) + ' / ' + total;
+}
+
+/* ============================================================
+   RENDER BẢNG TỪ VỰNG
+   ============================================================ */
+function renderTable(data = vocabulary) {
+  const tbody = document.getElementById('wordTableBody');
+  tbody.innerHTML = '';
+
+  data.forEach((item, i) => {
+    // Tìm index gốc để jump đến đúng thẻ
+    const realIdx = vocabulary.indexOf(item);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${item.word}</td>
+      <td>${item.phonetic}</td>
+      <td><span class="type-tag">${item.type}</span></td>
+      <td>${item.meaning}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.example.replace(/<\/?em>/g,'')}</td>
+    `;
+    // Click vào hàng → nhảy đến thẻ đó
+    tr.onclick = () => {
+      const orderIdx = cardOrder.indexOf(realIdx);
+      if (orderIdx !== -1) {
+        currentIndex = orderIdx;
+      } else {
+        currentIndex = realIdx;
+      }
+      seenCards.add(currentIndex);
+      renderCard();
+      updateProgress();
+      updateNavButtons();
+      // Cuộn lên khu vực flashcard
+      document.getElementById('flashcard-section').scrollIntoView({ behavior: 'smooth' });
+    };
+    tbody.appendChild(tr);
+  });
+}
+
+/* ============================================================
+   TÌM KIẾM — Filter bảng theo input
+   ============================================================ */
+function filterTable() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = vocabulary.filter(item =>
+    item.word.toLowerCase().includes(query) ||
+    item.meaning.toLowerCase().includes(query)
+  );
+  renderTable(filtered);
+}
+
+/* ============================================================
+   DARK MODE TOGGLE
+   ============================================================ */
+const themeToggle = document.getElementById('themeToggle');
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeToggle.textContent = isDark ? '🌙' : '☀️';
+  // Lưu preference vào localStorage
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+
+// Load saved theme khi mở trang
+(function loadTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '☀️';
+  }
+})();
+
+/* ============================================================
+   MOBILE NAVIGATION TOGGLE
+   ============================================================ */
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('is-open');
+}
+
+/* ============================================================
+   KEYBOARD SHORTCUTS — Điều hướng bằng bàn phím
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  switch(e.key) {
+    case 'ArrowRight': nextCard(); break;
+    case 'ArrowLeft':  prevCard(); break;
+    case ' ':          // Space bar = lật thẻ
+      e.preventDefault();
+      flipCard();
+      break;
+  }
+});
+
+/* ============================================================
+   KHỞI CHẠY
+   ============================================================ */
+init();
+</script>
+</body>
+</html>
