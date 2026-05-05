@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVO Summer Camp 2025 – Trường học Công nghệ & Sáng tạo</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B2B;
+    --orange-light: #FFF0E8;
+    --orange-mid: #FFD5BF;
+    --blue: #1B4FE4;
+    --blue-light: #E6EEFF;
+    --green: #17A26A;
+    --green-light: #E2F5EC;
+    --purple: #6C3DE8;
+    --purple-light: #F0EBFF;
+    --yellow: #F5A623;
+    --yellow-light: #FEF5E0;
+    --dark: #0F0F1A;
+    --dark2: #1C1C2E;
+    --text: #2C2C3E;
+    --muted: #6B6B80;
+    --border: rgba(0,0,0,0.08);
+    --white: #FFFFFF;
+    --bg: #FAF9FF;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--dark);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-weight: 600; font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white;
+    border: none; padding: 10px 24px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: #e55a1f; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1B4FE420 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 80%, #FF6B2B18 0%, transparent 60%),
+                radial-gradient(ellipse 40% 30% at 10% 70%, #6C3DE812 0%, transparent 50%);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,107,43,0.15); border: 1px solid rgba(255,107,43,0.3);
+    color: #FF9F6B; padding: 8px 20px; border-radius: 50px;
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em;
+    margin-bottom: 28px; position: relative;
+  }
+  .badge-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero h1 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    color: var(--white); position: relative;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: normal; color: var(--orange); }
+  .hero h1 .line2 { color: #A0B4FF; }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.6);
+    max-width: 620px; margin: 0 auto 44px; font-weight: 500;
+    position: relative;
+  }
+
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 16px 40px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem;
+    text-decoration: none; transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #e55a1f; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,43,0.4); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 16px 40px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem;
+    text-decoration: none; border: 1.5px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+    margin-top: 64px; position: relative;
+    padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 2rem; font-weight: 800;
+    color: white; display: block;
+  }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.45); font-weight: 500; }
+
+  /* SECTION COMMON */
+  section { padding: 100px 5%; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800;
+    line-height: 1.15; color: var(--dark); margin-bottom: 16px;
+  }
+  .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 580px; font-weight: 500; }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--dark2);
+    padding: 56px 5%;
+    display: flex; align-items: center; justify-content: center;
+    gap: 60px; flex-wrap: wrap;
+  }
+  .intro-chip {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(255,255,255,0.8); font-weight: 600; font-size: 1rem;
+  }
+  .chip-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+
+  /* PROGRAMS */
+  #chuong-trinh { background: white; }
+  .programs-header { max-width: 620px; margin-bottom: 60px; }
+
+  .program-card {
+    border-radius: 24px; overflow: hidden;
+    margin-bottom: 40px;
+    border: 1.5px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .program-card:hover { transform: translateY(-4px); box-shadow: 0 24px 64px rgba(0,0,0,0.1); }
+
+  .card-header {
+    padding: 48px 48px 36px;
+    display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap;
+  }
+  .card-icon-wrap {
+    width: 72px; height: 72px; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .card-meta { flex: 1; min-width: 240px; }
+  .program-num {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-meta h3 {
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.9rem; font-weight: 800;
+    line-height: 1.15; margin-bottom: 10px;
+  }
+  .card-meta p { font-size: 0.98rem; color: var(--muted); font-weight: 500; max-width: 560px; }
+
+  .card-levels {
+    display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+  }
+  .level-badge {
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 0.82rem; font-weight: 700; border: 1.5px solid;
+  }
+
+  .card-body { padding: 0 48px 48px; }
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 32px;
+  }
+  .module-item {
+    background: var(--bg); border-radius: 16px; padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .module-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .module-item h4 { font-family: 'Be Vietnam Pro', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+  .module-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+  .outcomes {
+    background: var(--bg); border-radius: 16px; padding: 24px 28px;
+    border: 1px solid var(--border);
+  }
+  .outcomes h4 {
+    font-family: 'Be Vietnam Pro', sans-serif; font-weight: 700; font-size: 0.95rem;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .outcomes ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .outcomes li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.9rem; color: var(--text); font-weight: 500;
+  }
+  .outcomes li::before { content: "✓"; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+
+  /* COLOR THEMES PER PROGRAM */
+  .prog-game { --accent: #FF6B2B; --accent-light: #FFF0E8; --accent-mid: #FFD5BF; }
+  .prog-robot { --accent: #1B4FE4; --accent-light: #E6EEFF; --accent-mid: #B5D0FF; }
+  .prog-ai { --accent: #6C3DE8; --accent-light: #F0EBFF; --accent-mid: #D5C5FF; }
+  .prog-drone { --accent: #17A26A; --accent-light: #E2F5EC; --accent-mid: #A7E8CF; }
+
+  [class*="prog-"] .card-icon-wrap { background: var(--accent-light); }
+  [class*="prog-"] .program-num { color: var(--accent); }
+  [class*="prog-"] .card-meta h3 { color: var(--dark); }
+  [class*="prog-"] .card-header { background: var(--accent-light); }
+  [class*="prog-"] .outcomes li::before { color: var(--accent); }
+
+  .prog-game .level-badge { border-color: #FF6B2B; color: #c44a15; background: #fff0e8; }
+  .prog-robot .level-badge { border-color: #1B4FE4; color: #1037b0; background: #E6EEFF; }
+  .prog-ai .level-badge { border-color: #6C3DE8; color: #4e23cc; background: #f0ebff; }
+  .prog-drone .level-badge { border-color: #17A26A; color: #0d6e47; background: #e2f5ec; }
+
+  /* SCHEDULE */
+  #lich-trinh { background: var(--bg); }
+  .schedule-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+  .day-card {
+    background: white; border-radius: 20px; padding: 32px;
+    border: 1.5px solid var(--border);
+  }
+  .day-label {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .day-title { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--dark); margin-bottom: 20px; }
+  .timeline { display: flex; flex-direction: column; gap: 12px; }
+  .tl-item { display: flex; gap: 14px; align-items: flex-start; }
+  .tl-time { font-size: 0.8rem; font-weight: 700; color: var(--muted); min-width: 60px; padding-top: 2px; }
+  .tl-content { flex: 1; }
+  .tl-title { font-size: 0.9rem; font-weight: 700; color: var(--dark); }
+  .tl-desc { font-size: 0.8rem; color: var(--muted); }
+  .tl-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+
+  /* PRICING */
+  #hoc-phi { background: white; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .price-card {
+    border-radius: 24px; padding: 36px 32px; border: 1.5px solid var(--border);
+    position: relative; transition: all 0.3s;
+  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+  .price-card.featured { border-color: var(--orange); background: var(--dark); }
+  .featured-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--orange); color: white;
+    padding: 6px 20px; border-radius: 50px; font-size: 0.78rem; font-weight: 700;
+    white-space: nowrap;
+  }
+  .price-name { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+  .price-card.featured .price-name { color: white; }
+  .price-duration { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+  .price-card.featured .price-duration { color: rgba(255,255,255,0.5); }
+  .price-amount {
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 2.4rem; font-weight: 800;
+    color: var(--dark); margin-bottom: 4px;
+  }
+  .price-card.featured .price-amount { color: white; }
+  .price-note { font-size: 0.82rem; color: var(--muted); margin-bottom: 28px; }
+  .price-card.featured .price-note { color: rgba(255,255,255,0.4); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .price-features li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 500; }
+  .price-card.featured .price-features li { color: rgba(255,255,255,0.8); }
+  .check-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+  .check-ok { background: #E2F5EC; color: #17A26A; }
+  .check-feat { background: rgba(255,107,43,0.2); color: #FF9F6B; }
+  .price-btn {
+    display: block; text-align: center; text-decoration: none;
+    padding: 14px; border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+  .price-btn-normal { background: var(--bg); color: var(--dark); border: 1.5px solid var(--border); }
+  .price-btn-normal:hover { background: var(--orange-light); border-color: var(--orange); color: var(--orange); }
+  .price-btn-feat { background: var(--orange); color: white; }
+  .price-btn-feat:hover { background: #e55a1f; }
+
+  /* FAQ */
+  #faq { background: var(--bg); }
+  .faq-list { max-width: 760px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: white; border-radius: 16px; border: 1.5px solid var(--border);
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 22px 28px; font-weight: 700; font-size: 1rem; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q .arrow { width: 24px; height: 24px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; font-size: 0.9rem; flex-shrink: 0; }
+  .faq-item.open .arrow { transform: rotate(180deg); background: var(--orange-light); color: var(--orange); }
+  .faq-a { padding: 0 28px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 28px 22px; }
+  .faq-a p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+
+  /* CTA FINAL */
+  .cta-section {
+    background: var(--dark); padding: 100px 5%;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    color: white; margin-bottom: 16px;
+  }
+  .cta-section h2 em { font-style: normal; color: var(--orange); }
+  .cta-section p { color: rgba(255,255,255,0.55); font-size: 1.05rem; max-width: 520px; margin: 0 auto 44px; }
+  .cta-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto; }
+  .cta-form input {
+    flex: 1; min-width: 220px; padding: 16px 24px; border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+    color: white; font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .cta-form input:focus { border-color: var(--orange); }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A14; padding: 48px 5%;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800; font-size: 1.1rem; color: white; }
+  .footer-logo span { color: var(--orange); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: rgba(255,255,255,0.4); font-size: 0.85rem; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+  .footer-copy { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+
+  /* SCROLL ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🚀 <span>EVO</span> Summer Camp 2025</div>
+  <ul class="nav-links">
+    <li><a href="#chuong-trinh">Chương trình</a></li>
+    <li><a href="#lich-trinh">Lịch trình</a></li>
+    <li><a href="#hoc-phi">Học phí</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#dang-ky" class="nav-cta">Đăng ký ngay</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Summer Camp 2025 · EVO – Đang nhận đăng ký
+  </div>
+  <h1>
+    Trại hè <em>Công nghệ</em><br>
+    <span class="line2">&amp; Sáng tạo</span>
+  </h1>
+  <p class="hero-sub">
+    4 chương trình học thực chiến dành cho học sinh từ cấp 1 đến cấp 3. Mỗi buổi 120 phút · 2–3 buổi mỗi môn · Tạo ra sản phẩm thật — không chỉ học lý thuyết.
+  </p>
+  <div class="hero-actions">
+    <a href="#chuong-trinh" class="btn-primary">Khám phá chương trình</a>
+    <a href="#hoc-phi" class="btn-outline">Xem học phí</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Chương trình</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">120'</span>
+      <span class="stat-label">Mỗi buổi học</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">2–3</span>
+      <span class="stat-label">Buổi / môn học</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Thực hành</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-chip">
+    <div class="chip-icon" style="background:rgba(255,107,43,0.15);">🎮</div>
+    Lập trình Game / App / Web
+  </div>
+  <div class="intro-chip">
+    <div class="chip-icon" style="background:rgba(27,79,228,0.15);">🤖</div>
+    Robotics thực chiến
+  </div>
+  <div class="intro-chip">
+    <div class="chip-icon" style="background:rgba(108,61,232,0.15);">🧠</div>
+    Lập trình AI ứng dụng
+  </div>
+  <div class="intro-chip">
+    <div class="chip-icon" style="background:rgba(23,162,106,0.15);">🚁</div>
+    In 3D &amp; Drone
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<section id="chuong-trinh">
+  <div class="programs-header reveal">
+    <div class="section-label">Chương trình học</div>
+    <h2 class="section-title">4 hướng đi — 1 mùa hè bùng cháy</h2>
+    <p class="section-sub">Mỗi chương trình được thiết kế riêng theo từng cấp học, đảm bảo phù hợp lứa tuổi và kích thích tư duy sáng tạo.</p>
+  </div>
+
+  <!-- PROGRAM 1: GAME / APP / WEBSITE -->
+  <div class="program-card prog-game reveal">
+    <div class="card-header">
+      <div class="card-icon-wrap">🎮</div>
+      <div class="card-meta">
+        <div class="program-num">Chương trình 01</div>
+        <h3>Lập trình Game · App · Website</h3>
+        <p>Từ ý tưởng đến sản phẩm số thực sự. Học sinh tự tay thiết kế giao diện, code logic và ra mắt sản phẩm của mình trước ngày bế mạc.</p>
+        <div class="card-levels">
+          <span class="level-badge">Cấp 1 (Lớp 3–5)</span>
+          <span class="level-badge">Cấp 2 (Lớp 6–9)</span>
+          <span class="level-badge">Cấp 3 (Lớp 10–12)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="modules-grid">
+        <div class="module-item">
+          <div class="module-icon">🎨</div>
+          <h4>Cấp 1 – Game Scratch</h4>
+          <p>Tạo nhân vật, thiết kế màn chơi và lập trình logic cơ bản bằng Scratch. Ra mắt mini-game của riêng mình.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">📱</div>
+          <h4>Cấp 2 – App Mobile</h4>
+          <p>Học Python / MIT App Inventor để làm ứng dụng điện thoại thực: to-do list, quiz app, game đơn giản.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🌐</div>
+          <h4>Cấp 3 – Web & Game 2D</h4>
+          <p>HTML/CSS/JavaScript + Phaser.js: xây website cá nhân hoặc game 2D có scoreboard và nhiều màn chơi.</p>
+        </div>
+      </div>
+      <div class="outcomes">
+        <h4 style="color:#c44a15;">🎯 Học sinh sẽ đạt được</h4>
+        <ul>
+          <li>Ra mắt sản phẩm số hoàn chỉnh (game / app / website) để trình bày trong ngày Demo Day</li>
+          <li>Hiểu tư duy lập trình: biến, vòng lặp, điều kiện, hàm và debug cơ bản</li>
+          <li>Tự tin thuyết trình ý tưởng và giải thích code trước khán giả</li>
+          <li>Nhận chứng chỉ hoàn thành và portfolio sản phẩm số</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM 2: ROBOTICS -->
+  <div class="program-card prog-robot reveal">
+    <div class="card-header">
+      <div class="card-icon-wrap">🤖</div>
+      <div class="card-meta">
+        <div class="program-num">Chương trình 02</div>
+        <h3>Lập trình Robotics</h3>
+        <p>Tay lắp robot — não lập trình. Học sinh xây dựng và điều khiển robot thực thụ, giải quyết thử thách kỹ thuật có tính cạnh tranh cao.</p>
+        <div class="card-levels">
+          <span class="level-badge">Cấp 1 (Lớp 3–5)</span>
+          <span class="level-badge">Cấp 2 (Lớp 6–9)</span>
+          <span class="level-badge">Cấp 3 (Lớp 10–12)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="modules-grid">
+        <div class="module-item">
+          <div class="module-icon">🧱</div>
+          <h4>Cấp 1 – LEGO Mindstorms</h4>
+          <p>Lắp ráp robot bằng LEGO, lập trình chuyển động, cảm biến và hoàn thành thử thách mê cung đơn giản.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">⚙️</div>
+          <h4>Cấp 2 – Arduino Robot</h4>
+          <p>Lắp mạch điện tử với Arduino, lập trình C++ cơ bản: robot tránh vật cản, bám đường line trên track.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🏆</div>
+          <h4>Cấp 3 – Robot thi đấu</h4>
+          <p>Thiết kế chiến thuật, code điều khiển nâng cao và thi đấu Robot Battle Day cuối khóa.</p>
+        </div>
+      </div>
+      <div class="outcomes">
+        <h4 style="color:#1037b0;">🎯 Học sinh sẽ đạt được</h4>
+        <ul>
+          <li>Hiểu nguyên lý điện tử cơ bản: mạch điện, cảm biến, servo và motor</li>
+          <li>Lập trình điều khiển robot hoàn chỉnh và debug phần cứng thực tế</li>
+          <li>Tham gia mini-tournament với đội khác — rèn kỹ năng làm việc nhóm và tư duy chiến thuật</li>
+          <li>Nhận chứng chỉ + robot được mang về nhà (Cấp 1 và Cấp 2)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM 3: AI -->
+  <div class="program-card prog-ai reveal">
+    <div class="card-header">
+      <div class="card-icon-wrap">🧠</div>
+      <div class="card-meta">
+        <div class="program-num">Chương trình 03</div>
+        <h3>Lập trình &amp; Ứng dụng AI</h3>
+        <p>Không chỉ dùng AI — mà hiểu cách xây dựng sản phẩm AI tương tác với con người. Đây là chương trình độc quyền và mới nhất của chúng tôi.</p>
+        <div class="card-levels">
+          <span class="level-badge">Cấp 2 (Lớp 6–9)</span>
+          <span class="level-badge">Cấp 3 (Lớp 10–12)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="modules-grid">
+        <div class="module-item">
+          <div class="module-icon">💬</div>
+          <h4>Cấp 2 – Trò chơi AI tương tác</h4>
+          <p>Dùng Teachable Machine và Scratch AI để tạo trò chơi nhận diện cử chỉ, giọng nói hoặc cảm xúc khuôn mặt.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🔬</div>
+          <h4>Cấp 3 – Sản phẩm AI thực</h4>
+          <p>Python + API AI (OpenAI, HuggingFace): xây chatbot tư vấn, công cụ phân loại ảnh hoặc app gợi ý cá nhân hóa.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🎭</div>
+          <h4>AI Ethics &amp; Design</h4>
+          <p>Thiết kế trải nghiệm người dùng cho sản phẩm AI: luồng hội thoại, phản hồi thông minh và đạo đức AI.</p>
+        </div>
+      </div>
+      <div class="outcomes">
+        <h4 style="color:#4e23cc;">🎯 Học sinh sẽ đạt được</h4>
+        <ul>
+          <li>Hiểu cách AI học từ dữ liệu và ứng dụng thực tế của Machine Learning</li>
+          <li>Xây dựng sản phẩm AI tương tác với người dùng thực (không phải demo giả)</li>
+          <li>Trình bày sản phẩm trong AI Showcase Day — được mentor và doanh nghiệp đánh giá</li>
+          <li>Chứng chỉ AI Foundations và định hướng nghề nghiệp công nghệ tương lai</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM 4: 3D / DRONE -->
+  <div class="program-card prog-drone reveal">
+    <div class="card-header">
+      <div class="card-icon-wrap">🚁</div>
+      <div class="card-meta">
+        <div class="program-num">Chương trình 04</div>
+        <h3>In 3D &amp; Lập trình Drone</h3>
+        <p>Từ màn hình máy tính đến vật thể nắm trong tay — rồi cất cánh. Chương trình cao cấp nhất với công nghệ hiện đại nhất.</p>
+        <div class="card-levels">
+          <span class="level-badge">Cấp 2 (Lớp 7–9)</span>
+          <span class="level-badge">Cấp 3 (Lớp 10–12)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="modules-grid">
+        <div class="module-item">
+          <div class="module-icon">🖨️</div>
+          <h4>Thiết kế CAD 3D</h4>
+          <p>Dùng Tinkercad / Fusion 360 thiết kế vật thể 3D từ đầu và in ra sản phẩm nhựa thực tế mang về.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🚁</div>
+          <h4>Lập trình Drone</h4>
+          <p>Bay drone thực tế, lập trình hành trình tự động, nhiệm vụ cứu hộ giả lập và thi đấu obstacle race.</p>
+        </div>
+        <div class="module-item">
+          <div class="module-icon">🏗️</div>
+          <h4>Kỹ thuật tổng hợp</h4>
+          <p>Kết hợp in 3D + drone: thiết kế phụ tùng cho drone của nhóm và bay với chính linh kiện mình đã in.</p>
+        </div>
+      </div>
+      <div class="outcomes">
+        <h4 style="color:#0d6e47;">🎯 Học sinh sẽ đạt được</h4>
+        <ul>
+          <li>Hiểu quy trình kỹ thuật cơ học: từ thiết kế số đến sản phẩm vật lý thực tế</li>
+          <li>Vận hành drone an toàn và lập trình hành trình bay tự động</li>
+          <li>Hoàn thành dự án nhóm: thiết kế và trình diễn drone race trước phụ huynh</li>
+          <li>Chứng chỉ + sản phẩm 3D mang về nhà + ảnh/video drone flight</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="lich-trinh">
+  <div class="reveal" style="text-align:center; margin-bottom: 0;">
+    <div class="section-label">Lịch trình mẫu</div>
+    <h2 class="section-title">Một ngày trại hè diễn ra như thế nào?</h2>
+    <p class="section-sub" style="margin: 0 auto;">Mỗi buổi học kéo dài 120 phút. Mỗi môn học được chia thành 2–3 buổi thực hành liên tiếp, đảm bảo học sinh nắm vững trước khi chuyển sang chủ đề mới.</p>
+  </div>
+  <div class="schedule-wrap">
+    <div class="day-card reveal">
+      <div class="day-label">Buổi sáng</div>
+      <div class="day-title">Khởi động &amp; Học kiến thức</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#FF6B2B;"></div>
+          <div class="tl-time">08:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Check-in &amp; Warm-up</div>
+            <div class="tl-desc">Hoạt động nhóm, icebreaker games</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#1B4FE4;"></div>
+          <div class="tl-time">08:15</div>
+          <div class="tl-content">
+            <div class="tl-title">Buổi học 1 — Lý thuyết (120 phút)</div>
+            <div class="tl-desc">Giảng dạy có minh họa, hỏi đáp trực tiếp</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#F5A623;"></div>
+          <div class="tl-time">10:15</div>
+          <div class="tl-content">
+            <div class="tl-title">Nghỉ giải lao &amp; ăn nhẹ</div>
+            <div class="tl-desc">15 phút — vận động tự do</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#17A26A;"></div>
+          <div class="tl-time">10:30</div>
+          <div class="tl-content">
+            <div class="tl-title">Mini challenge nhóm</div>
+            <div class="tl-desc">Thi đua giải bài tập ngắn, có điểm thưởng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-label">Buổi chiều</div>
+      <div class="day-title">Dự án &amp; Tổng kết ngày</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#FF6B2B;"></div>
+          <div class="tl-time">13:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Nghỉ trưa + giải lao</div>
+            <div class="tl-desc">Ăn trưa, nghỉ ngơi tự do</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#1B4FE4;"></div>
+          <div class="tl-time">14:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Buổi học 2 — Thực hành (120 phút)</div>
+            <div class="tl-desc">Mentor đồng hành, học sinh tự chủ xây dựng sản phẩm</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#6C3DE8;"></div>
+          <div class="tl-time">16:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Stand-up chia sẻ &amp; Leaderboard</div>
+            <div class="tl-desc">Mỗi nhóm chia sẻ tiến độ, nhận feedback, cập nhật bảng điểm</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#F5A623;"></div>
+          <div class="tl-time">16:30</div>
+          <div class="tl-content">
+            <div class="tl-title">Bế mạc ngày &amp; ra về</div>
+            <div class="tl-desc">Nhận nhật ký học tập, bài tập về nhà tự chọn</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-label">Ngày cuối khóa</div>
+      <div class="day-title">Demo Day &amp; Lễ tốt nghiệp</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#FF6B2B;"></div>
+          <div class="tl-time">09:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Chuẩn bị Demo</div>
+            <div class="tl-desc">Hoàn thiện sản phẩm, rehearse thuyết trình</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#6C3DE8;"></div>
+          <div class="tl-time">10:30</div>
+          <div class="tl-content">
+            <div class="tl-title">Trình diễn sản phẩm</div>
+            <div class="tl-desc">Phụ huynh, thầy cô và khách mời tham dự</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#17A26A;"></div>
+          <div class="tl-time">12:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Trao giải &amp; chứng chỉ</div>
+            <div class="tl-desc">Top 3 sản phẩm nhận giải thưởng đặc biệt</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#F5A623;"></div>
+          <div class="tl-time">13:00</div>
+          <div class="tl-content">
+            <div class="tl-title">Tiệc bế mạc + chụp ảnh</div>
+            <div class="tl-desc">Kỷ niệm, giao lưu cùng toàn bộ trại hè</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="hoc-phi">
+  <div class="reveal" style="text-align:center;">
+    <div class="section-label">Học phí</div>
+    <h2 class="section-title">Đầu tư xứng đáng cho mỗi chương trình</h2>
+    <p class="section-sub" style="margin: 0 auto;">Tất cả bao gồm tài liệu, thiết bị thực hành, bữa nhẹ và chứng chỉ hoàn thành. Liên hệ EVO để nhận báo giá chi tiết theo nhu cầu.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-name">🎮 Game · App · Website</div>
+      <div class="price-duration">2–3 buổi / môn · 120 phút / buổi</div>
+      <div class="price-amount" style="font-size:1.8rem; color:var(--orange);">Liên hệ</div>
+      <div class="price-note">Hotline: 0847 432 432</div>
+      <ul class="price-features">
+        <li><span class="check-icon check-ok">✓</span> Tài liệu &amp; tài khoản phần mềm</li>
+        <li><span class="check-icon check-ok">✓</span> Thiết bị thực hành đầy đủ</li>
+        <li><span class="check-icon check-ok">✓</span> Chứng chỉ hoàn thành</li>
+        <li><span class="check-icon check-ok">✓</span> Portfolio sản phẩm số</li>
+      </ul>
+      <a href="tel:0847432432" class="price-btn price-btn-normal">Gọi ngay tư vấn</a>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-name">🤖 Robotics</div>
+      <div class="price-duration">2–3 buổi / môn · 120 phút / buổi</div>
+      <div class="price-amount" style="font-size:1.8rem; color:var(--orange);">Liên hệ</div>
+      <div class="price-note">Hotline: 0847 432 432</div>
+      <ul class="price-features">
+        <li><span class="check-icon check-ok">✓</span> Bộ kit Arduino / LEGO</li>
+        <li><span class="check-icon check-ok">✓</span> Thiết bị thực hành đầy đủ</li>
+        <li><span class="check-icon check-ok">✓</span> Chứng chỉ hoàn thành</li>
+        <li><span class="check-icon check-ok">✓</span> Robot mang về nhà (Cấp 1&amp;2)</li>
+      </ul>
+      <a href="tel:0847432432" class="price-btn price-btn-normal">Gọi ngay tư vấn</a>
+    </div>
+    <div class="price-card featured reveal">
+      <div class="featured-badge">⭐ Nổi bật nhất</div>
+      <div class="price-name">🧠 AI Applications</div>
+      <div class="price-duration">2–3 buổi / môn · 120 phút / buổi</div>
+      <div class="price-amount" style="font-size:1.8rem; color:#FF9F6B;">Liên hệ</div>
+      <div class="price-note" style="color:rgba(255,255,255,0.4);">Hotline: 0847 432 432</div>
+      <ul class="price-features">
+        <li><span class="check-icon check-feat">✓</span> Tài khoản AI API premium</li>
+        <li><span class="check-icon check-feat">✓</span> Thiết bị thực hành đầy đủ</li>
+        <li><span class="check-icon check-feat">✓</span> AI Showcase Day cho phụ huynh</li>
+        <li><span class="check-icon check-feat">✓</span> Kết nối mentor ngành công nghệ</li>
+      </ul>
+      <a href="tel:0847432432" class="price-btn price-btn-feat">Gọi ngay ↗</a>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-name">🚁 In 3D &amp; Drone</div>
+      <div class="price-duration">2–3 buổi / môn · 120 phút / buổi</div>
+      <div class="price-amount" style="font-size:1.8rem; color:var(--orange);">Liên hệ</div>
+      <div class="price-note">Hotline: 0847 432 432</div>
+      <ul class="price-features">
+        <li><span class="check-icon check-ok">✓</span> Thời gian máy in 3D không giới hạn</li>
+        <li><span class="check-icon check-ok">✓</span> Thiết bị thực hành đầy đủ</li>
+        <li><span class="check-icon check-ok">✓</span> Sản phẩm 3D mang về nhà</li>
+        <li><span class="check-icon check-ok">✓</span> Video drone flight kỷ niệm</li>
+      </ul>
+      <a href="tel:0847432432" class="price-btn price-btn-normal">Gọi ngay tư vấn</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:24px;color:var(--muted);font-size:0.9rem;font-weight:500;">
+    💡 Giảm học phí khi đăng ký nhóm từ 3 học sinh trở lên · Liên hệ EVO để biết thêm ưu đãi
+  </p>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal" style="text-align:center;">
+    <div class="section-label">Câu hỏi thường gặp</div>
+    <h2 class="section-title">Bạn đang thắc mắc điều gì?</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Học sinh cần có kiến thức lập trình từ trước không?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Không cần. Tất cả chương trình đều bắt đầu từ con số 0 và được phân cấp theo lứa tuổi. Mentor sẽ hỗ trợ từng em cá nhân. Học sinh đã có kiến thức sẽ được giao bài thử thách nâng cao hơn.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Sĩ số mỗi lớp là bao nhiêu? Mentor theo kèm như thế nào?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Mỗi nhóm tối đa 12–15 học sinh với 1 giảng viên chính và 1–2 trợ giảng. Tỉ lệ mentor:học sinh là 1:6, đảm bảo từng em đều được hỗ trợ đầy đủ trong quá trình thực hành.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Chương trình diễn ra ở đâu và bắt đầu từ khi nào?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Trại hè diễn ra tại <strong>Trường học Công nghệ và Sáng tạo EVO</strong> — 75A Thủy Nguyên, KĐT Ecopark, Hưng Yên, với phòng lab được trang bị đầy đủ máy tính, thiết bị và kết nối internet tốc độ cao. Các đợt dự kiến khai giảng vào tháng 6 và tháng 7 năm 2025. Lịch cụ thể sẽ được thông báo sau khi xác nhận đăng ký.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Có cần mang laptop cá nhân không?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Không bắt buộc. Chương trình cung cấp đủ máy tính cho mỗi học sinh. Tuy nhiên, nếu em có laptop cá nhân và muốn mang theo để luyện tập thêm ngoài giờ thì hoàn toàn được khuyến khích.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Phụ huynh có thể tham quan trong quá trình học không?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Chúng tôi tổ chức Open Day vào giữa khóa để phụ huynh ghé thăm và xem con thực hành. Demo Day cuối khóa là sự kiện chính thức mời toàn bộ phụ huynh đến chứng kiến sản phẩm của các em.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Chính sách hoàn tiền nếu học sinh không thể tham gia?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <p>Hoàn 100% nếu hủy trước 14 ngày khai giảng. Hoàn 50% nếu hủy trong vòng 7–14 ngày trước khai giảng. Không hoàn tiền sau khi khóa học đã bắt đầu, nhưng có thể chuyển sang đợt tiếp theo trong cùng năm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="dang-ky">
+  <div class="section-label" style="color:#FF9F6B;">Đăng ký ngay hôm nay</div>
+  <h2>Mùa hè này, con bạn<br>sẽ <em>tạo ra thứ gì đó</em></h2>
+  <p>Để lại thông tin — đội ngũ EVO sẽ liên hệ trong vòng 24 giờ để tư vấn chương trình phù hợp nhất cho con.</p>
+  <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:32px;">
+    <a href="tel:0847432432" class="btn-primary" style="font-size:1.1rem; padding:18px 44px; display:flex; align-items:center; gap:10px;">
+      📞 0847 432 432
+    </a>
+    <a href="#" class="btn-outline" style="font-size:1rem; padding:18px 36px;">Nhắn tin Zalo</a>
+  </div>
+  <div class="cta-form">
+    <input type="text" placeholder="Họ tên phụ huynh">
+    <input type="text" placeholder="Số điện thoại">
+  </div>
+  <div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <select style="padding:16px 24px; border-radius:50px; border:1.5px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.7); font-family:'Be Vietnam Pro',sans-serif; font-size:0.95rem; outline:none;">
+      <option value="">Chọn chương trình quan tâm</option>
+      <option>🎮 Lập trình Game · App · Website</option>
+      <option>🤖 Lập trình Robotics</option>
+      <option>🧠 Lập trình &amp; Ứng dụng AI</option>
+      <option>🚁 In 3D &amp; Drone</option>
+    </select>
+    <button class="btn-primary" style="font-size:1rem; padding:16px 40px;">Gửi thông tin ↗</button>
+  </div>
+  <p style="margin-top:32px; color:rgba(255,255,255,0.35); font-size:0.85rem;">
+    📍 75A Thủy Nguyên, KĐT Ecopark, Hưng Yên &nbsp;·&nbsp; Hotline: 0847 432 432
+  </p>
+  <p style="margin-top:8px; color:rgba(255,255,255,0.2); font-size:0.8rem;">
+    Chúng tôi không chia sẻ thông tin cá nhân với bên thứ ba.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🚀 <span>EVO</span> Summer Camp 2025</div>
+  <div class="footer-links">
+    <a href="#chuong-trinh">Chương trình</a>
+    <a href="#lich-trinh">Lịch trình</a>
+    <a href="#hoc-phi">Học phí</a>
+    <a href="#faq">FAQ</a>
+    <a href="#dang-ky">Đăng ký</a>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:4px; text-align:right;">
+    <div class="footer-copy" style="color:rgba(255,255,255,0.5);">📍 75A Thủy Nguyên, KĐT Ecopark, Hưng Yên</div>
+    <div class="footer-copy" style="color:rgba(255,255,255,0.5);">Hotline: <a href="tel:0847432432" style="color:#FF9F6B; text-decoration:none;">0847 432 432</a></div>
+    <div class="footer-copy">© 2025 Trường học Công nghệ và Sáng tạo EVO</div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
