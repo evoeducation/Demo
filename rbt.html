@@ -1,1 +1,569 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trại Hè STEM 2025 — Chương Trình Giảng Dạy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0F14;
+  --bg2: #13161D;
+  --bg3: #1A1E28;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #E8EAF0;
+  --text2: #8B909E;
+  --text3: #555A68;
+  --robot-1: #3B82F6;
+  --robot-2: #60A5FA;
+  --robot-light: rgba(59,130,246,0.12);
+  --robot-glow: rgba(59,130,246,0.25);
+  --ai-1: #A855F7;
+  --ai-2: #C084FC;
+  --ai-light: rgba(168,85,247,0.12);
+  --ai-glow: rgba(168,85,247,0.25);
+  --green: #22C55E;
+  --amber: #F59E0B;
+  --coral: #F97316;
+}
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,15,20,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-logo { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); letter-spacing: -0.02em; }
+.nav-logo span { color: var(--robot-2); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--text2); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-badge { background: var(--robot-light); color: var(--robot-2); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(59,130,246,0.3); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 80px 2rem 60px;
+  max-width: 900px; margin: 0 auto;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 13px; color: var(--text2); margin-bottom: 24px;
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--robot-2); }
+
+.hero-sub { font-size: 17px; color: var(--text2); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+
+.hero-meta {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+}
+.meta-pill {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 10px 20px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--text2);
+}
+.meta-pill strong { color: var(--text); font-weight: 500; }
+.meta-icon { font-size: 18px; }
+
+/* ─── TRACKS ─── */
+.tracks-section { padding: 20px 2rem 60px; max-width: 900px; margin: 0 auto; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 20px; }
+
+.tracks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.track-card {
+  background: var(--bg2); border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 28px; cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  position: relative; overflow: hidden;
+}
+.track-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  border-radius: 16px 16px 0 0;
+}
+.track-card.robot::before { background: linear-gradient(90deg, var(--robot-1), var(--robot-2)); }
+.track-card.ai-track::before { background: linear-gradient(90deg, var(--ai-1), var(--ai-2)); }
+.track-card:hover { transform: translateY(-2px); }
+.track-card.robot:hover { border-color: rgba(59,130,246,0.4); }
+.track-card.ai-track:hover { border-color: rgba(168,85,247,0.4); }
+
+.track-card.coming-soon { opacity: 0.6; cursor: default; }
+.track-card.coming-soon:hover { transform: none; }
+
+.track-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 16px;
+}
+.track-card.robot .track-icon { background: var(--robot-light); }
+.track-card.ai-track .track-icon { background: var(--ai-light); }
+
+.track-card h3 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+.track-card p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
+
+.track-stats { display: flex; gap: 16px; }
+.track-stat { font-size: 13px; color: var(--text3); }
+.track-stat strong { display: block; font-size: 16px; font-weight: 500; color: var(--text2); }
+
+.coming-badge {
+  display: inline-block; background: var(--ai-light);
+  color: var(--ai-2); font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em;
+  border: 1px solid rgba(168,85,247,0.3); margin-top: 4px;
+}
+
+/* ─── CURRICULUM ─── */
+.curriculum { padding: 0 2rem 80px; max-width: 900px; margin: 0 auto; }
+
+.curr-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 32px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.curr-track-badge {
+  background: var(--robot-light); color: var(--robot-2);
+  font-size: 13px; font-weight: 600; padding: 6px 14px;
+  border-radius: 8px; border: 1px solid rgba(59,130,246,0.3);
+}
+.curr-header h2 { font-family: 'DM Serif Display', serif; font-size: 28px; letter-spacing: -0.02em; }
+
+/* Session tabs */
+.sess-nav { display: flex; gap: 4px; margin-bottom: 28px; background: var(--bg2); padding: 4px; border-radius: 12px; border: 1px solid var(--border); width: fit-content; }
+.sess-btn {
+  background: transparent; border: none; color: var(--text2);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  padding: 8px 20px; border-radius: 8px; cursor: pointer;
+  transition: all 0.18s;
+}
+.sess-btn:hover { color: var(--text); background: var(--bg3); }
+.sess-btn.active { background: var(--robot-1); color: #fff; }
+
+.session { display: none; }
+.session.active { display: block; animation: fadeUp 0.25s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* Session top */
+.sess-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 20px; margin-bottom: 28px; align-items: start;
+}
+.sess-title { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.02em; margin-bottom: 10px; }
+.sess-goal {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 14px; color: var(--text2); line-height: 1.65;
+}
+.sess-goal strong { color: var(--text); display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 600; }
+
+.sess-quick { display: flex; flex-direction: column; gap: 8px; min-width: 160px; }
+.quick-pill { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: center; }
+.quick-pill .q-val { font-size: 20px; font-weight: 500; color: var(--robot-2); line-height: 1; }
+.quick-pill .q-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
+.tl-row { display: flex; gap: 16px; }
+.tl-spine { display: flex; flex-direction: column; align-items: center; width: 20px; flex-shrink: 0; padding-top: 4px; }
+.tl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.tl-line { width: 1px; flex: 1; background: var(--border); margin: 4px 0; }
+.tl-row:last-child .tl-line { display: none; }
+.tl-body { padding-bottom: 24px; flex: 1; }
+.tl-time { font-size: 12px; color: var(--text3); font-weight: 500; margin-bottom: 4px; letter-spacing: 0.02em; }
+.tl-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.tl-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+.tl-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.tag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px; letter-spacing: 0.03em; }
+.tag-theory { background: rgba(59,130,246,0.12); color: #60A5FA; }
+.tag-practice { background: rgba(245,158,11,0.12); color: #FBBF24; }
+.tag-play { background: rgba(249,115,22,0.1); color: #FB923C; }
+.tag-share { background: rgba(34,197,94,0.1); color: #4ADE80; }
+
+/* Materials */
+.sess-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mat-box, .tip-box {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px;
+}
+.box-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); margin-bottom: 12px; }
+.mat-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mat-chip { background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--text2); }
+.tip-text { font-size: 14px; color: var(--text2); line-height: 1.65; }
+.tip-text::before { content: '💡 '; }
+
+/* ─── OVERVIEW GRID ─── */
+.overview-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+.ov-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 16px; text-align: center;
+}
+.ov-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--robot-2); line-height: 1; }
+.ov-lbl { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+.progress-track { margin-bottom: 28px; }
+.prog-row { margin-bottom: 12px; }
+.prog-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+.prog-label span { color: var(--text2); }
+.prog-label small { color: var(--text3); }
+.prog-bar { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+
+.objectives { display: flex; flex-direction: column; gap: 10px; }
+.obj-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text2); line-height: 1.6; }
+.obj-check { width: 18px; height: 18px; border-radius: 5px; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 11px; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 2rem;
+  text-align: center; color: var(--text3); font-size: 13px;
+}
+footer strong { color: var(--text2); font-weight: 500; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .tracks-grid { grid-template-columns: 1fr; }
+  .sess-top { grid-template-columns: 1fr; }
+  .sess-quick { flex-direction: row; }
+  .sess-bottom { grid-template-columns: 1fr; }
+  .overview-cards { grid-template-columns: repeat(2, 1fr); }
+  nav .nav-links { display: none; }
+  .hero h1 { font-size: 38px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">STEM <span>Camp</span> 2025</div>
+  <div class="nav-links">
+    <a href="#tracks">Chương trình</a>
+    <a href="#curriculum">Chi tiết buổi học</a>
+  </div>
+  <div class="nav-badge">Tài liệu nội bộ</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    Tài liệu dành cho Ban Tổ Chức — Trại Hè 2025
+  </div>
+  <h1>Chương trình<br><em>Robotics & AI</em><br>Trại Hè STEM</h1>
+  <p class="hero-sub">Chương trình giảng dạy thực hành dành cho học sinh từ 10–13 tuổi, được thiết kế theo từng chủ đề mở rộng theo năm.</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><span class="meta-icon">📅</span> <div><strong>4 buổi</strong> / chương trình</div></div>
+    <div class="meta-pill"><span class="meta-icon">⏱️</span> <div><strong>120 phút</strong> / buổi</div></div>
+    <div class="meta-pill"><span class="meta-icon">👦</span> <div><strong>10 – 13</strong> tuổi</div></div>
+    <div class="meta-pill"><span class="meta-icon">👥</span> <div><strong>2–3 học sinh</strong> / nhóm</div></div>
+  </div>
+</section>
+
+<!-- TRACKS -->
+<section class="tracks-section" id="tracks">
+  <div class="section-label">Chọn chương trình</div>
+  <div class="tracks-grid">
+    <div class="track-card robot" onclick="showTrack('robot')">
+      <div class="track-icon">🤖</div>
+      <h3>Robotics — VEX IQ</h3>
+      <p>Lắp ráp, lập trình và điều khiển robot thực tế bằng bộ VEX IQ. Học tư duy kỹ thuật qua thử thách thực hành.</p>
+      <div class="track-stats">
+        <div class="track-stat"><strong>4</strong> buổi</div>
+        <div class="track-stat"><strong>8h</strong> tổng</div>
+        <div class="track-stat"><strong>VEX IQ Kit</strong></div>
+      </div>
+    </div>
+    <div class="track-card ai-track coming-soon">
+      <div class="track-icon">🧠</div>
+      <h3>Trí tuệ nhân tạo — AI</h3>
+      <p>Khám phá cách AI hoạt động, huấn luyện mô hình đơn giản và ứng dụng AI vào các vấn đề thực tế.</p>
+      <div class="track-stats">
+        <div class="track-stat"><strong>4</strong> buổi</div>
+        <div class="track-stat"><strong>8h</strong> tổng</div>
+        <div class="track-stat"><strong>Sắp có</strong></div>
+      </div>
+      <div><span class="coming-badge">✦ SẮP RA MẮT</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM — ROBOT TRACK -->
+<section class="curriculum" id="curriculum">
+  <div class="curr-header">
+    <span class="curr-track-badge">🤖 Robotics</span>
+    <h2>Chương trình VEX IQ — Chi tiết buổi học</h2>
+  </div>
+
+  <div class="sess-nav">
+    <button class="sess-btn active" onclick="showSession(0)">Tổng quan</button>
+    <button class="sess-btn" onclick="showSession(1)">Buổi 1</button>
+    <button class="sess-btn" onclick="showSession(2)">Buổi 2</button>
+    <button class="sess-btn" onclick="showSession(3)">Buổi 3</button>
+    <button class="sess-btn" onclick="showSession(4)">Buổi 4</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="session active" id="sess-0">
+    <div class="overview-cards">
+      <div class="ov-card"><div class="ov-num">4</div><div class="ov-lbl">Buổi học</div></div>
+      <div class="ov-card"><div class="ov-num">480'</div><div class="ov-lbl">Tổng thời gian</div></div>
+      <div class="ov-card"><div class="ov-num">12+</div><div class="ov-lbl">Hoạt động</div></div>
+      <div class="ov-card"><div class="ov-num">1</div><div class="ov-lbl">Robot hoàn chỉnh</div></div>
+    </div>
+
+    <div class="progress-track">
+      <div class="section-label" style="margin-bottom:16px">Lộ trình học tập</div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Buổi 1 — Khám phá & Lắp ráp</span><small>Nền tảng</small></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--robot-1)"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Buổi 2 — Lập trình cơ bản</span><small>Điều khiển</small></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:#22C55E"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Buổi 3 — Cảm biến & Tự động hóa</span><small>Thông minh</small></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--amber)"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Buổi 4 — Thi đấu & Trình bày</span><small>Hoàn thiện</small></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--coral)"></div></div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:16px">Mục tiêu tổng thể</div>
+    <div class="objectives">
+      <div class="obj-item"><div class="obj-check">✓</div>Hiểu cấu trúc cơ bản của robot VEX IQ: Brain, Motor, Cảm biến, Kết nối</div>
+      <div class="obj-item"><div class="obj-check">✓</div>Lắp ráp hoàn chỉnh mô hình xe robot có thể vận hành được</div>
+      <div class="obj-item"><div class="obj-check">✓</div>Lập trình điều khiển robot bằng VEXcode IQ Blocks (lệnh tuần tự, vòng lặp, điều kiện)</div>
+      <div class="obj-item"><div class="obj-check">✓</div>Sử dụng cảm biến khoảng cách và va chạm để robot phản ứng với môi trường</div>
+      <div class="obj-item"><div class="obj-check">✓</div>Rèn luyện tư duy sáng tạo, kỹ năng làm việc nhóm và trình bày ý tưởng</div>
+    </div>
+  </div>
+
+  <!-- BUỔI 1 -->
+  <div class="session" id="sess-1">
+    <div class="sess-top">
+      <div>
+        <div class="tl-time" style="color:var(--robot-2);font-size:13px;font-weight:600;margin-bottom:8px">BUỔI 1 / 4</div>
+        <div class="sess-title">Khám phá Robot & Lắp ráp cơ bản</div>
+        <div class="sess-goal">
+          <strong>Mục tiêu buổi học</strong>
+          Học sinh nhận biết được các bộ phận chính của VEX IQ, lắp ráp được khung xe cơ bản và điều khiển bằng tay.
+        </div>
+      </div>
+      <div class="sess-quick">
+        <div class="quick-pill"><div class="q-val">120'</div><div class="q-lbl">Thời lượng</div></div>
+        <div class="quick-pill"><div class="q-val">5</div><div class="q-lbl">Hoạt động</div></div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-spine"><div class="tl-dot" style="background:var(--robot-1)"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-time">0 – 15 phút</div>
+          <div class="tl-name">Chào hỏi & Khơi gợi</div>
+          <div class="tl-desc">Giới thiệu trại hè và giáo viên hướng dẫn. Chiếu video robot VEX IQ thi đấu thực tế. Hỏi: "Theo em robot là gì? Robot đang giúp ích gì cho cuộc sống con người?"</div>
+          <div class="tl-tags"><span class="tag tag-theory">Lý thuyết</span><span class="tag tag-share">Tương tác</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-spine"><div class="tl-dot" style="background:var(--robot-1)"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-time">15 – 35 phút</div>
+          <div class="tl-name">Nhận diện linh kiện VEX IQ</div>
+          <div class="tl-desc">Phát bộ linh kiện cho từng nhóm. Giới thiệu: Brain, Motor, Smart Cable, bánh xe, thanh beam, chốt pin. Học sinh phân loại linh kiện vào khay theo hướng dẫn.</div>
+          <div class="tl-tags"><span class="tag tag-theory">Lý thuyết</span><span class="tag tag-practice">Thực hành</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-spine"><div class="tl-dot" style="background:var(--robot-1)"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-time">35 – 80 phút</div>
+          <div class="tl-name">Lắp ráp khung xe 2 bánh chủ động</div>
+          <div class="tl-desc">Theo hướng dẫn từng bước: lắp khung beam → gắn motor vào bánh sau → kết nối Smart Cable với Brain. Giáo viên hỗ trợ khi nhóm bị kẹt — không làm thay. Khuyến khích học sinh thử sai và tự sửa.</div>
+          <div class="tl-tags"><span class="tag tag-practice">Thực hành</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-spine"><div class="tl-dot" style="background:var(--robot-1)"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-time">80 – 105 phút</div>
+          <div class="tl-name">Chạy thử & Điều khiển tay</div>
+          <div class="tl-desc">Bật Brain, kết nối Controller, điều khiển xe chạy thẳng và quẹo. Ghi nhận vấn đề gặp phải (xe bị lệch, dây chưa cắm đúng cổng...). Nhóm nào xong sớm thêm bánh trước (castor).</div>
+          <div class="tl-tags"><span class="tag tag-play">Thử nghiệm</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-spine"><div class="tl-dot" style="background:var(--robot-1)"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-time">105 – 120 phút</div>
+          <div class="tl-name">Tổng kết & Đặt câu hỏi cho buổi sau</div>
+          <div class="tl-desc">Mỗi nhóm chia sẻ 1 điều thú vị nhất trong buổi học. Giáo viên đặt câu hỏi kích thích: "Làm sao để robot tự chạy mà không cần mình cầm tay điều khiển?"</div>
+          <div class="tl-tags"><span class="tag tag-share">Chia sẻ</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sess-bottom">
+      <div class="mat-box">
+        <div class="box-title">Vật liệu cần chuẩn bị</div>
+        <div class="mat-chips">
+          <span class="mat-chip">VEX IQ Starter Kit</span>
+          <span class="mat-chip">VEX Brain</span>
+          <span class="mat-chip">2× Motor</span>
+          <span class="mat-chip">Smart Cable</span>
+          <span class="mat-chip">Controller</span>
+          <span class="mat-chip">Khay phân loại</span>
+          <span class="mat-chip">Video robot (chiếu)</span>
+          <span class="mat-chip">Máy chiếu</span>
+        </div>
+      </div>
+      <div class="tip-box">
+        <div class="box-title">Gợi ý giáo viên</div>
+        <div class="tip-text">Để một bộ lắp sẵn trên bàn làm mẫu tham khảo, nhưng úp xuống cho đến khi học sinh cần. Điều này khuyến khích tự khám phá trước khi tham khảo đáp án.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUỔI 2 -->
+  <div class="session" id="sess-2">
+    <div class="sess-top">
+      <div>
+        <div class="tl-time" style="color:#22C55E;font-size:13px;font-weight:600;margin-bottom:8px">BUỔI 2 / 4</div>
+        <div class="sess-title">Lập trình cơ bản với VEXcode IQ</div>
+        <div class="sess-goal">
+          <strong>Mục tiêu buổi học</strong>
+          Học sinh viết được chương trình điều khiển robot di chuyển theo quỹ đạo định sẵn, hiểu lệnh tuần tự và vòng lặp.
+        </div>
+      </div>
+      <div class="sess-quick">
+        <div class="quick-pill"><div class="q-val" style="color:#22C55E">120'</div><div class="q-lbl">Thời lượng</div></div>
+        <div class="quick-pill"><div class="q-val" style="color:#22C55E">5</div><div class="q-lbl">Hoạt động</div></div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:#22C55E"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">0 – 15 phút</div><div class="tl-name">Ôn lại & Giới thiệu lập trình khối</div><div class="tl-desc">Ôn lại bài cũ bằng câu hỏi nhanh. Giới thiệu VEXcode IQ Blocks — lập trình kéo thả giống Scratch. Giải thích: robot làm đúng những gì mình ra lệnh, không hơn không kém.</div><div class="tl-tags"><span class="tag tag-theory">Lý thuyết</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:#22C55E"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">15 – 40 phút</div><div class="tl-name">Thử thách "Đi thẳng 1 mét"</div><div class="tl-desc">Học sinh dùng lệnh drive forward để robot đi đúng 1 mét. Điều chỉnh thông số tốc độ và thời gian. Học tư duy trial-and-error: thử → đo kết quả → điều chỉnh → thử lại.</div><div class="tl-tags"><span class="tag tag-practice">Thực hành</span><span class="tag tag-play">Thử nghiệm</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:#22C55E"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">40 – 75 phút</div><div class="tl-name">Thử thách "Hình vuông"</div><div class="tl-desc">Lập trình robot đi theo hình vuông: đi thẳng → quẹo 90° → lặp lại 4 lần. Học vòng lặp repeat. Các nhóm tự chọn kích thước ô vuông của mình. Dán băng keo trên sàn làm đường kẻ.</div><div class="tl-tags"><span class="tag tag-practice">Thực hành</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:#22C55E"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">75 – 105 phút</div><div class="tl-name">Sáng tạo tự do — "Vẽ chữ cái"</div><div class="tl-desc">Thử thách mở: lập trình robot "vẽ" chữ cái đầu tên của mình trên sàn. Không có đáp án đúng — mỗi nhóm tự thiết kế đường đi. Nhóm xong sớm thêm chữ thứ hai.</div><div class="tl-tags"><span class="tag tag-play">Sáng tạo</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:#22C55E"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">105 – 120 phút</div><div class="tl-name">Demo & Nhận xét</div><div class="tl-desc">Từng nhóm chạy demo chữ cái trước lớp. Cả lớp nhận xét. Câu hỏi kết thúc: "Nếu có vật cản trên đường, robot có tự tránh được không?"</div><div class="tl-tags"><span class="tag tag-share">Chia sẻ</span></div></div></div>
+    </div>
+    <div class="sess-bottom">
+      <div class="mat-box"><div class="box-title">Vật liệu cần chuẩn bị</div><div class="mat-chips"><span class="mat-chip">Máy tính / Tablet</span><span class="mat-chip">VEXcode IQ (cài sẵn)</span><span class="mat-chip">Dây USB kết nối</span><span class="mat-chip">Băng keo màu</span><span class="mat-chip">Thước dây</span><span class="mat-chip">Robot từ buổi 1</span></div></div>
+      <div class="tip-box"><div class="box-title">Gợi ý giáo viên</div><div class="tip-text">Khi robot đi không đúng, đừng sửa ngay — hỏi "Em nghĩ tại sao nó bị lệch?" Kỹ năng debug quan trọng hơn kết quả đúng ngay lần đầu.</div></div>
+    </div>
+  </div>
+
+  <!-- BUỔI 3 -->
+  <div class="session" id="sess-3">
+    <div class="sess-top">
+      <div>
+        <div class="tl-time" style="color:var(--amber);font-size:13px;font-weight:600;margin-bottom:8px">BUỔI 3 / 4</div>
+        <div class="sess-title">Cảm biến & Robot thông minh</div>
+        <div class="sess-goal">
+          <strong>Mục tiêu buổi học</strong>
+          Học sinh lắp và lập trình cảm biến Distance & Bumper, làm robot tự tránh vật cản và phản hồi va chạm.
+        </div>
+      </div>
+      <div class="sess-quick">
+        <div class="quick-pill"><div class="q-val" style="color:var(--amber)">120'</div><div class="q-lbl">Thời lượng</div></div>
+        <div class="quick-pill"><div class="q-val" style="color:var(--amber)">5</div><div class="q-lbl">Hoạt động</div></div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">0 – 20 phút</div><div class="tl-name">Cảm biến là gì? — Giác quan của robot</div><div class="tl-desc">So sánh cảm biến với giác quan con người: Mắt = cảm biến khoảng cách, Da = cảm biến va chạm. Cho học sinh thử chặn tay trước Distance Sensor để xem số đo thay đổi trên màn hình Brain.</div><div class="tl-tags"><span class="tag tag-theory">Lý thuyết</span><span class="tag tag-play">Thử nghiệm</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">20 – 50 phút</div><div class="tl-name">Lắp cảm biến & Lập trình IF-THEN</div><div class="tl-desc">Lắp Distance Sensor lên đầu xe. Lập trình: "Nếu khoảng cách &lt; 20cm thì dừng lại". Thêm Bumper Sensor: "Nếu bị đụng thì lùi và quẹo". Giới thiệu khái niệm điều kiện (if/else).</div><div class="tl-tags"><span class="tag tag-practice">Thực hành</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">50 – 90 phút</div><div class="tl-name">Thử thách "Mê cung"</div><div class="tl-desc">Dùng hộp carton tạo hành lang mê cung đơn giản. Robot phải tự điều hướng qua mê cung mà không chạm tường. Nhóm tự cải tiến code cho đến khi vượt qua được. Bắt đầu với hành lang thẳng, tăng dần độ khó.</div><div class="tl-tags"><span class="tag tag-play">Thử thách</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">90 – 110 phút</div><div class="tl-name">Thêm âm thanh & Đèn LED (mở rộng)</div><div class="tl-desc">Lập trình Brain phát âm thanh khi phát hiện vật cản, đổi màu đèn LED theo trạng thái di chuyển. Biến robot thành "robot biểu cảm" có cá tính riêng của nhóm.</div><div class="tl-tags"><span class="tag tag-practice">Thực hành</span><span class="tag tag-play">Sáng tạo</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">110 – 120 phút</div><div class="tl-name">Lên kế hoạch cho buổi cuối</div><div class="tl-desc">Thông báo buổi 4 sẽ có thi đấu và trình bày. Mỗi nhóm suy nghĩ muốn cải tiến thêm gì cho robot. Ghi vào giấy nhớ dán lên robot để không quên.</div><div class="tl-tags"><span class="tag tag-share">Lên kế hoạch</span></div></div></div>
+    </div>
+    <div class="sess-bottom">
+      <div class="mat-box"><div class="box-title">Vật liệu cần chuẩn bị</div><div class="mat-chips"><span class="mat-chip">Distance Sensor</span><span class="mat-chip">Bumper Sensor</span><span class="mat-chip">Hộp carton</span><span class="mat-chip">Băng keo màu</span><span class="mat-chip">Giấy nhớ</span><span class="mat-chip">Smart Cable dự phòng</span></div></div>
+      <div class="tip-box"><div class="box-title">Gợi ý giáo viên</div><div class="tip-text">Đừng làm mê cung quá khó ngay lần đầu. Bắt đầu với hành lang thẳng rồi thêm 1–2 góc quẹo. Thành công nhỏ tạo động lực cho thử thách lớn hơn.</div></div>
+    </div>
+  </div>
+
+  <!-- BUỔI 4 -->
+  <div class="session" id="sess-4">
+    <div class="sess-top">
+      <div>
+        <div class="tl-time" style="color:var(--coral);font-size:13px;font-weight:600;margin-bottom:8px">BUỔI 4 / 4</div>
+        <div class="sess-title">Thi đấu & Trình bày thành quả</div>
+        <div class="sess-goal">
+          <strong>Mục tiêu buổi học</strong>
+          Học sinh hoàn thiện robot, trình bày ý tưởng trước nhóm, thi đấu vui vẻ và tự hào về thành quả 4 buổi.
+        </div>
+      </div>
+      <div class="sess-quick">
+        <div class="quick-pill"><div class="q-val" style="color:var(--coral)">120'</div><div class="q-lbl">Thời lượng</div></div>
+        <div class="quick-pill"><div class="q-val" style="color:var(--coral)">5</div><div class="q-lbl">Hoạt động</div></div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--coral)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">0 – 25 phút</div><div class="tl-name">Thời gian cải tiến tự do</div><div class="tl-desc">Mỗi nhóm hoàn thiện robot theo ghi chú từ buổi 3. Giáo viên đi hỗ trợ kỹ thuật. Không có giới hạn — muốn thêm cánh tay gắp, thêm cảm biến, đổi thiết kế đều được thử.</div><div class="tl-tags"><span class="tag tag-practice">Thực hành</span><span class="tag tag-play">Sáng tạo</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--coral)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">25 – 60 phút</div><div class="tl-name">Thi đấu "Robot vượt chướng ngại vật"</div><div class="tl-desc">Sân thi: đường thẳng → góc quẹo → khu vực vật cản. Robot chạy tự động (không điều khiển tay). Tính điểm theo khoảng cách vượt qua được. Mỗi nhóm có 2 lượt, tính lượt tốt nhất.</div><div class="tl-tags"><span class="tag tag-play">Thi đấu</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--coral)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">60 – 90 phút</div><div class="tl-name">Pitching: Giới thiệu robot của nhóm tôi</div><div class="tl-desc">Mỗi nhóm có 3 phút: đặt tên robot, nêu 1 tính năng đặc biệt nhất, chia sẻ khó khăn đã vượt qua. Các nhóm khác đặt câu hỏi. Khuyến khích tư duy phản biện tích cực.</div><div class="tl-tags"><span class="tag tag-share">Trình bày</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--coral)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">90 – 110 phút</div><div class="tl-name">Trao giải & Ghi nhận</div><div class="tl-desc">Trao các giải: 🏆 Vô địch, 🎨 Sáng tạo nhất, 🤝 Teamwork xuất sắc, 💡 Cải tiến nhiều nhất. Thiết kế nhiều hạng mục để mỗi nhóm đều có cơ hội được công nhận. Trao chứng nhận hoàn thành cho tất cả học sinh.</div><div class="tl-tags"><span class="tag tag-share">Trao giải</span></div></div></div>
+      <div class="tl-row"><div class="tl-spine"><div class="tl-dot" style="background:var(--coral)"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">110 – 120 phút</div><div class="tl-name">Tổng kết & Định hướng tiếp theo</div><div class="tl-desc">Hỏi: "Em muốn học tiếp gì về robot và công nghệ?" Giới thiệu VEX IQ Competition và cộng đồng STEM Việt Nam. Chụp ảnh lưu niệm cùng robot và cả nhóm.</div><div class="tl-tags"><span class="tag tag-share">Tổng kết</span></div></div></div>
+    </div>
+    <div class="sess-bottom">
+      <div class="mat-box"><div class="box-title">Vật liệu cần chuẩn bị</div><div class="mat-chips"><span class="mat-chip">Sân thi đấu</span><span class="mat-chip">Vật cản</span><span class="mat-chip">Băng keo vạch đường</span><span class="mat-chip">Huy chương / phần thưởng</span><span class="mat-chip">Chứng nhận in sẵn</span><span class="mat-chip">Máy ảnh</span><span class="mat-chip">Bảng tính điểm</span></div></div>
+      <div class="tip-box"><div class="box-title">Gợi ý giáo viên</div><div class="tip-text">Thiết kế nhiều hạng mục giải thưởng để mỗi nhóm đều có cơ hội được công nhận. Trại hè kết thúc bằng cảm giác thành công sẽ tạo động lực học tiếp cho các em.</div></div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>Tài liệu nội bộ — <strong>Trại Hè STEM 2025</strong></p>
+  <p style="margin-top:8px">Chương trình Robotics VEX IQ · Phiên bản 1.0 · Dành cho học sinh 10–13 tuổi</p>
+  <p style="margin-top:6px;color:var(--text3);font-size:12px">© 2025 Ban Tổ Chức Trại Hè — Tài liệu này dành cho nội bộ, vui lòng không phân phối bên ngoài</p>
+</footer>
+
+<script>
+function showSession(n) {
+  document.querySelectorAll('.session').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sess-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sess-' + n).classList.add('active');
+  document.querySelectorAll('.sess-btn')[n].classList.add('active');
+}
+function showTrack(track) {
+  if (track === 'robot') {
+    document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>
